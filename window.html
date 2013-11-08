@@ -1,0 +1,17 @@
+
+<div id='chatHistory'> 
+</div>
+<div class='chatWindow'>
+    <input id='chatContent' type='text' length='40' />
+    <input id='submit' type='button' value='submit' />
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#submit").click(function(obj) {
+        //var msg = $(obj).prev('input[type=text]').val() || 'empty msg';
+        var history = $('#chatHistory');
+        var msg = $('#chatContent').val() || 'empty msg';
+        $(history).append('<div class="msgItem">'+msg+'</div>');
+        $('#chatContent').val('');
+    });
+</script>
