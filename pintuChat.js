@@ -4,6 +4,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var socket = require('socket.io');
+var qs = require('querystring');
 //var mysql = require('mysql');
 //var mongo = require('mongojs');
 var dburl = "pintu";
@@ -19,8 +20,13 @@ db.user.insert({
 });
 */
 //db.user.findAll();
-var httpServer = http.createServer(function(req, res) {
+var httpServer = http.createServer();
+
+var entryIndex = function(req, res) {
+    req.setEncoding('utf8');
     res.writeHead(200, {'Content-Type': 'text/html'});
+    //sentmsg(req, res);
+    //console.log(req, res);
     var url = req.url;
     //if(url == '/') {
         url = 'window.html';
@@ -41,9 +47,22 @@ var httpServer = http.createServer(function(req, res) {
         res.write(data);
         res.end();
     });
+}
+    //var user = db.user.find({'name': 'rereadyou'});
 
+var sentmsg = function(req, res) {
+    var post = '';
+    req.on('data', function(chunk) {
+        post += chunk; 
+    });
+    req.on('end', function() {
+        post = qs.parse(post);
+        console.log(post);
+        res.write(post);
+    });
+}
 
-    var user = db.user.find({'name': 'rereadyou'});
-}).listen(12000);
+httpServer.on('request', entryIndex);
+httpServer.listen(12000);
 
 console.log('server started, listen on port: 12000');

@@ -2,8 +2,12 @@
 <div id='chatHistory'> 
 </div>
 <div class='chatWindow'>
-    <input id='chatContent' type='text' length='40' />
-    <input id='submit' type='button' value='submit' />
+    <form action="sentmsg" method="post">
+        <input id='username' type='text' length='10' />
+        <input id='chatContent' type='text' length='40' />
+        </ br>
+        <input id='submit' type='button' value='submit' />
+    </form>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script type="text/javascript">
